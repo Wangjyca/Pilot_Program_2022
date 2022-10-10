@@ -1,0 +1,31 @@
+﻿1,,Architect,Sub Architect
+2,,Environmental Consultant,Sub Environmental Consultant
+3,,Permits and Fees,Permit Fee
+4,,Final Cleaning,Sub Cleaning
+5,@,Demolition,Wage&Materials
+6,@,Hauling,Wage&Materials
+7,,Abatement,Sub Abatement
+8,@,Rough Carpentry/Framing,Wage&Materials
+9,@,Cabinets,Wage&Materials
+10,,Countertop / Backsplash,Wage&Materials
+11,@,Trim / Baseboard / Molding / Shelving,Wage&Materials
+12,@,Insulation,Wage&Materials
+13,@,Doors & Hardware x 2 - doors ,Wage&Materials
+14,@,Window Repair,Wage&Materials
+15,,Drywall,Sub Drywall
+16,,Tile,Sub Tile
+17,,Wood Flooring (New),Sub Flooring
+18,,Floor Patch / Refinish Existing,Sub Flooring
+19,,Painting (Interior),Sub Painting
+20,@,Bath Accessories,Wage&Materials
+21,@,Appliances,Wage&Materials
+22,@,Window Blinds,Wage&Materials
+23,,Rough Plumbing,Sub Plumbing
+24,@,Tub Replacement or Glazing,Wage&Materials
+25,,Finish Plumbing Fixtures/Trim,Sub Plumbing
+26,@,Heating System,Wage&Materials
+27,,Rough Electrical,Sub Electrical
+28,,Finish Electrical Fixtures / Trim,Sub Electrical
+29,@,Low Voltage Systems (Fire/Security/Cable),Wage&Materials
+30,@,Contractor's Fee / Profit & Overhead,Indirect Cost
+31,@,Construction Management Fee,Indirect Cost
