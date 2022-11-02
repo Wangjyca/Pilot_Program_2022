@@ -6,7 +6,7 @@ Copyright by Hugo and Jingyu Wang 4/2/2020
 list_inhouse_task = []
 
 def inhouse_tasks_setting_list_from_file(filename:str)->dict:
-     
+     '''Jingyu Wang 9/3/2022 To create a list that for the budget of in house jobs   ''''
      with open(filename,'r') as fd:
           for line in fd:
                line = line.strip()

@@ -1,5 +1,5 @@
 """
-Copyright by Hugo and Jingyu Wang 9.30.2022 
+Copyright by Jingyu Wang 9.30.2022 
 
 """
 import csv
