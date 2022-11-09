@@ -98,16 +98,12 @@ def budgetReport_lines2list(lines)-> tuple:
                          inhouse_mark,standard_catergory)
              
              list_budgets.append(the_tuple)
-     '''         
-     for list_budget in list_budgets:        
-         if list_budget[4]:
-              print(list_budget[0],'\t',list_budget[1],'\t',list_budget[2],'\t',list_budget[3])
-     print("-------")
-     '''    
+
+  
      # Split element of the list of in house task item to two elements,  labor cost at one element and materials cost at another element
      for i in range(len(list_budgets) - 1 , 0, -1):
           if list_budgets[i][4] == "H":
-               list_budgets.insert( i + 1, (list_budgets[i][0],0,0,list_budgets[i][2],"H","Wage"))
+               list_budgets.insert( i + 1, (list_budgets[i][0],0,0,list_budgets[i][2],"H","Wages"))
                list_budgets[i] =           (list_budgets[i][0],0,0,list_budgets[i][1],"H","Materials") 
 
      '''          
