@@ -107,7 +107,7 @@ def Calculation2():
     """
 
     #Set uP below --------
-    
+   
     actualcost_text_disp.delete("1.0","end")
     actualcost_text_report.delete("1.0","end")
     actualcost_amount_label.config(text = "0.00")
@@ -115,12 +115,12 @@ def Calculation2():
     
     if actualCost_setting("Setting_ActualCost.csv") != True: # To get the translating dictionary
        actualcost_text_disp.insert("1.0", "File Setting_ActualCost.csv" + '\n' + "is not at the same folder of the program"  + '\n') 
-    return
+       return
     
     #Set up above--------
-
+ 
     result = getDatafromClipboard()  # To get the data from the clipborad in where the user copy the gross data
-    
+
     if not result:
         actualcost_text_disp.insert("end","Nothing I can do for the actual data!" + '\n')
         return -1
