@@ -11,12 +11,18 @@ from tkinter import ttk
 #import Tools
 from SumTool import text2lines, lines2dict, trimDollarMark
 
-from AllocatingTool import BudgetCost_setting,ActualCost_setting ,budgetReport_lines2dictwithTuples
+from AllocatingTool import BudgetCost_setting,ActualCost_setting ,\
+                           budgetReport_lines2list, \
+                           actualCostReport_lines2dict,\
+                           budgetReport_lines2dict
+
+global  budget_dict 
+global  actual_dict
 
 
-#Setting before the interface opending
-BudgetCost_setting("Setting_BudgetCost.csv")
-ActualCost_setting("Setting_ActualCost.csv")
+
+
+
 
 
 # ROOT WINDOW
@@ -32,7 +38,7 @@ screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
 widthofroot = 908 #screen_width * 0.9
-heightofroot = 220 #screen_height * 0.2
+heightofroot = 320 #screen_height * 0.2
 
 # set the window at the center of the screen
 x_coordinate = (screen_width - widthofroot) / 2
@@ -105,23 +111,15 @@ def cleanup():
 
 
 
-def Calculation():   
+def Calculation1():   
     result = getDatafromClipboard() # To get the data from the clipborad in where the user copy the gross data
     #print(repr(result))
     if result  == "":
         print("Nothing I can do for the statistic!")
         return -1
-    """  see below text formation from clipboard
-            2222 Leavenworth St Unit 302	$3,000.00
-            2200 Leavenworth St Unit 202	$3,000.00
-            2222 Leavenworth St Unit 302	$3,000.00
-            2200 Leavenworth St Unit 202	$3,000.00
-            2222 Leavenworth St Unit 302	$3,000.00
-            2200 Leavenworth St Unit 202	$3,000.00
-            2222 Leavenworth St Unit 202	$3,000.00
 
-    """
-    
+    BudgetCost_setting("Setting_BudgetCost.csv")
+
     cleanup() # Initialize the widgets of the root window
     
     # each transaction in list [major1 \t amount1, major2 \t amount2, ...]
@@ -139,7 +137,7 @@ def Calculation():
 
     sumresult = ""
     for d_transaction in d_transactions: # To insert data to the output window and generate the text string for clip
-        print(d_transaction, d_transactions[d_transaction])
+        #print(d_transaction, d_transactions[d_transaction])
         
         sumresult += d_transaction + "\t " + str(d_transactions[d_transaction])+"\n "
         output.insert('','end', values=[d_transaction,d_transactions[d_transaction]])
@@ -151,11 +149,85 @@ def Calculation():
     copyDatatoClipboard(sumresult)
 
     ''' Testing '''
-    budgetReport_lines2dictwithTuples(lines)
-
-    return 0
+    #budgetReport_lines2list(lines)
+    budget_dict = budgetReport_lines2dict(lines)
+    for budget_d in sorted(budget_dict.keys()):
+        if budget_dict[budget_d]:
+            print(budget_d,"\t ",budget_dict[budget_d]) 
+    #print("budget_dict",budget_dict)
+        
+    val = sum(budget_dict[budget_d] for budget_d in budget_dict)
+    print(val)
     
 
+    return budget_dict
+    
+
+def Calculation2():
+    """  see below text formation from clipboard
+            2222 Leavenworth St Unit 302	$3,000.00
+            2200 Leavenworth St Unit 202	$3,000.00
+            2222 Leavenworth St Unit 302	$3,000.00
+            2200 Leavenworth St Unit 202	$3,000.00
+            2222 Leavenworth St Unit 302	$3,000.00
+            2200 Leavenworth St Unit 202	$3,000.00
+            2222 Leavenworth St Unit 202	$3,000.00
+
+    """
+    
+    result = getDatafromClipboard() # To get the data from the clipborad in where the user copy the gross data
+    #print(repr(result))
+    if result  == "":
+        print("Nothing I can do for the statistic!")
+        return -1
+
+    cleanup() # Initialize the widgets of the root window
+    ActualCost_setting("Setting_ActualCost.csv")
+    
+    # each transaction in list [major1 \t amount1, major2 \t amount2, ...]
+    lines = text2lines(result)
+    
+    # statistic dictionary { major1: total_amount1, major2: total_amount2, ...  }
+    d_transactions = dict()
+    d_transactions = lines2dict(lines)
+    #print(lines)
+    #print(d_transactions)
+    
+    for line in lines: # To insert data to the imput window 
+        l = line.split("\t")
+        imput.insert('','end', values=l)
+
+    sumresult = ""
+    for d_transaction in d_transactions: # To insert data to the output window and generate the text string for clip
+        #print(d_transaction, d_transactions[d_transaction])
+        
+        sumresult += d_transaction + "\t " + str(d_transactions[d_transaction])+"\n "
+        output.insert('','end', values=[d_transaction,d_transactions[d_transaction]])
+
+    select_itemIn("c")
+    select_itemOut("c")
+
+
+    copyDatatoClipboard(sumresult)
+
+    actual_dict = actualCostReport_lines2dict(lines)
+    for actual_d in sorted(actual_dict.keys()):
+        if actual_dict[actual_d]:
+            print(actual_d,"\t ",actual_dict[actual_d])
+    val= sum(actual_dict[actual_d] for actual_d in actual_dict)
+    print(val)
+
+    return actual_dict
+
+
+def Comparison():
+    if budget_dict and actual_dict:
+        print(budget_dict)
+        print(actual_dict)
+        pass
+        
+
+    
     
 frame = LabelFrame(root, text = "Tool:", padx = 5, pady=5, height = heightofroot*0.9)
 frame.pack(side = tk.LEFT,padx =5, pady=5)
@@ -168,11 +240,34 @@ labelin=Label(frame)
 labelout=Label(frame)
 # After user copy two columns (string & digit columns) from a spread sheet
 # and user clicks this button, the gross data fill in the left datawindow
-b = Button(frame, text = "Calculate", command = Calculation )
+actual_dict ={}
+budget_dict = {}
+def invoke(self):
+    """Invoke the command associated with the button.
+    The return value is the return value from the command,
+    or an empty string if there is no command associated with
+    the button. This command is ignored if the button's state
+    is disabled.
+    """
+    return self.tk.call(self._w, 'invoke')
+
+b1 = Button(frame, text = "Budget", command =  Calculation1) 
+actual_dict = b1.invoke()
+print("actual_dict",actual_dict)
+
+b2 = Button(frame, text = "Actual Cost", command = Calculation2 )
+b3 = Button(frame, text = "Comparing", command = Comparison )
 
 labelin.grid(row = 0, column = 0)
-b.grid(row = 0, column = 1)
+b1.grid(row = 3, column = 0)
+b2.grid(row = 3, column = 2)
+b3.grid(row = 3, column = 3)
+
+
 labelout.grid(row = 0, column = 2)
+
+
+
 
 # the left treeview datawindow
 imput = ttk.Treeview(frame, columns=(1,2), show = "headings", height="5")

@@ -1,4 +1,4 @@
-﻿1,Automobile Expense,Indirect Cost
+1,Automobile Expense,Indirect Cost
 2, Drywall,Sub Drywall
 3, Dues and Subscriptions,Indirect Cost
 4, Electrical,Sub Electrical
@@ -11,7 +11,7 @@
 11, Lumber or plie Wood  Material,Materials
 12, Materials,Materials
 13, Paint  Material,Materials
-14, Painting,Sub  Painting
+14, Painting,Sub Painting
 15, Parking,Indirect Cost
 16, Payroll Expenses MRA,Indirect Cost
 17, Payroll Processing Fees,Indirect Cost
@@ -23,3 +23,16 @@
 23, Transportation,Indirect Cost
 24, Wages, Wages
 25, Work Comp, Wages
+26,CalSavers (Retirement Plan),Indirect Cost
+27,Job Permits,Permits
+28,Local,Indirect Cost
+29,Office Equip <$2500,Indirect Cost
+30,Office Supplies,Indirect Cost
+31,Tools and Machinery,Indirect Cost
+32,Marketing,Indirect Cost
+33,MARKETING,Indirect Cost
+,Granite Fabrication,Granite Fabrication
+,Cleaning,Sub Cleaning
+,Citations,Indirect Cost
+,Metal  Material,Materials
+,Registration,Indirect Cost

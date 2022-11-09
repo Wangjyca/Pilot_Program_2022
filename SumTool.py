@@ -3,7 +3,23 @@ Copyright by Hugo and Jingyu Wang 4/2/2020
 
 """
 
+list_inhouse_task = []
 
+def inhouse_tasks_setting_list_from_file(filename:str)->dict:
+     
+     with open(filename,'r') as fd:
+          for line in fd:
+               line = line.strip()
+               if not line:
+                    continue
+               if line[0] =='@':
+                    list_inhouse_task.append(line[1:])
+               #print(line, line[0])
+          
+          return list_inhouse_task
+
+
+     
 def text2lines(result)->list:
      """Returns a list of lines from Clipboard"""
             
