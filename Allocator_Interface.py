@@ -223,22 +223,23 @@ root.iconbitmap()
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
-widthofroot = 1180 # interface width
-heightofroot = 800 # interface height
+widthofroot = screen_width * 0.8#1180 # interface width
+heightofroot = screen_height * 0.8 #800 # interface height
 
 # set the window at the center of the screen
 x_coordinate = (screen_width - widthofroot) / 2
 y_coordinate = (screen_height - heightofroot)/2
 
 root.geometry("%dx%d+%d+%d" % (widthofroot,heightofroot,x_coordinate,y_coordinate))
-fontsizeDW = 12
-fontsize = 10
+
 window_height = int(heightofroot *(1/2.3) / 10 )
 inputwin_width = int( widthofroot  / 3 /10)
 reportwin_width = int( widthofroot / 2.6 /10)
 
-button_width = 15
+fontsizeDW = int(window_height / 2)#12
+fontsize = int(window_height / 3)#10
 
+button_width = int(window_height / 2)#15
 
 #Yview Function
 def multiple_yview(*args):
